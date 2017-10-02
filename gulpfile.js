@@ -8,6 +8,7 @@ var gulp   = require('gulp'),
 		sass = require('gulp-sass'),
 		sourcemaps = require('gulp-sourcemaps'),
 		uglify = require('gulp-uglify'),
+		babel = require('gulp-babel'),
 		browserSync = require('browser-sync'),
 		reload = browserSync.reload;
 
@@ -37,6 +38,9 @@ gulp.task('scripts', function() {
 	return gulp.src('src/js/*.js')
 		.pipe(plumber({
 		  errorHandler: notify.onError("Error: <%= error.message %>")
+		}))
+		.pipe(babel({
+			presets: ['env']
 		}))
 		.pipe(uglify())
 		.pipe(concat('scripts.min.js'))

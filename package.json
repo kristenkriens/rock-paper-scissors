@@ -7,17 +7,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-env": "^1.6.0",
     "browser-sync": "*",
     "gulp": "*",
     "gulp-autoprefixer": "*",
+    "gulp-babel": "*",
     "gulp-concat": "*",
     "gulp-imagemin": "*",
     "gulp-minify-css": "*",
     "gulp-notify": "*",
     "gulp-plumber": "*",
+    "gulp-pug": "*",
     "gulp-sass": "*",
     "gulp-sourcemaps": "*",
-    "gulp-uglify": "*",
-    "gulp-pug": "*"
+    "gulp-uglify": "*"
   }
 }
