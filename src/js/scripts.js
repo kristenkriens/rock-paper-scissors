@@ -25,27 +25,27 @@ $('input[type="radio"]').on('click', function() {
   choices = `The computer chose ${computerChoice} and you chose ${userChoice}`;
 
   if ((userChoice === 'Scissors' || computerChoice === 'Scissors') && (userChoice === 'Paper' || computerChoice === 'Paper')) {
-    var outcome = 'Scissors cuts Paper';
+    outcome = 'Scissors cuts Paper';
   } else if ((userChoice === 'Paper' || computerChoice === 'Paper') && (userChoice === 'Rock' || computerChoice === 'Rock')) {
-    var outcome = 'Paper covers Rock';
+    outcome = 'Paper covers Rock';
   } else if ((userChoice === 'Rock' || computerChoice === 'Rock') && (userChoice === 'Lizard' || computerChoice === 'Lizard')) {
-    var outcome = 'Rock crushes Lizard';
+    outcome = 'Rock crushes Lizard';
   } else if ((userChoice === 'Lizard' || computerChoice === 'Lizard') && (userChoice === 'Spock' || computerChoice === 'Spock')) {
-    var outcome = 'Lizard poisons Spock';
+    outcome = 'Lizard poisons Spock';
   } else if ((userChoice === 'Spock' || computerChoice === 'Spock') && (userChoice === 'Scissors' || computerChoice === 'Scissors')) {
-    var outcome = 'Spock smashes Scissors';
+    outcome = 'Spock smashes Scissors';
   } else if ((userChoice === 'Scissors' || computerChoice === 'Scissors') && (userChoice === 'Lizard' || computerChoice === 'Lizard')) {
-    var outcome = 'Scissors decapitates Lizard';
+    outcome = 'Scissors decapitates Lizard';
   } else if ((userChoice === 'Lizard' || computerChoice === 'Lizard') && (userChoice === 'Paper' || computerChoice === 'Paper')) {
-    var outcome = 'Lizard eats Paper';
+    outcome = 'Lizard eats Paper';
   } else if ((userChoice === 'Paper' || computerChoice === 'Paper') && (userChoice === 'Spock' || computerChoice === 'Spock')) {
-    var outcome = 'Paper disproves Spock';
+    outcome = 'Paper disproves Spock';
   } else if ((userChoice === 'Spock' || computerChoice === 'Spock') && (userChoice === 'Rock' || computerChoice === 'Rock')) {
-    var outcome = 'Spock vaporizes Rock';
+    outcome = 'Spock vaporizes Rock';
   } else if ((userChoice === 'Rock' || computerChoice === 'Rock') && (userChoice === 'Scissors' || computerChoice === 'Scissors')) {
-    var outcome = 'Rock crushes Scissors';
+    outcome = 'Rock crushes Scissors';
   } else {
-    var outcome = 'You chose the same as the computer';
+    outcome = 'You chose the same as the computer';
   }
 
   if (computerChoice === userChoice) {
