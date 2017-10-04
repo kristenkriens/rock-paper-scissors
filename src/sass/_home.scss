@@ -1,4 +1,4 @@
-.rules-results {
+.rules-score {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -8,7 +8,7 @@
       width: calc(100% - 200px);
     }
 
-    &--results {
+    &--score {
       width: 180px;
     }
 

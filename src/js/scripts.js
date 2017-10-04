@@ -49,15 +49,15 @@ $('input[type="radio"]').on('click', function() {
   }
 
   if (computerChoice === userChoice) {
-    $('.rules-results__item--text h3').text(`${choices}. ${outcome}, so it's a tie!`);
+    $('.rules-score__item--text h3').text(`${choices}. ${outcome}, so it's a tie!`);
     score.tie += 1;
     $('tr:last-of-type td:nth-of-type(3)').text(score.tie);
   } else if ((userChoice === 'Scissors' && computerChoice === 'Paper') || (userChoice === 'Paper' && computerChoice === 'Rock') || (userChoice === 'Rock' && computerChoice === 'Lizard') || (userChoice === 'Lizard' && computerChoice === 'Spock') || (userChoice === 'Spock' && computerChoice === 'Scissors') || (userChoice === 'Scissors' && computerChoice === 'Lizard') || (userChoice === 'Lizard' && computerChoice === 'Paper') || (userChoice === 'Paper' && computerChoice === 'Spock') || (userChoice === 'Spock' && computerChoice === 'Rock') || (userChoice === 'Rock' && computerChoice === 'Scissors')) {
-    $('.rules-results__item--text h3').text(`${choices}. ${outcome}, so you win!`);
+    $('.rules-score__item--text h3').text(`${choices}. ${outcome}, so you win!`);
     score.win += 1;
     $('tr:last-of-type td:nth-of-type(1)').text(score.win);
   } else {
-    $('.rules-results__item--text h3').text(`${choices}. ${outcome}, so you lose!`);
+    $('.rules-score__item--text h3').text(`${choices}. ${outcome}, so you lose!`);
     score.lose += 1;
     $('tr:last-of-type td:nth-of-type(2)').text(score.lose);
   }
