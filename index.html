@@ -8,9 +8,83 @@
   <link rel="stylesheet" type="text/css" href="dist/css/styles.css">
 </head>
 <body>
-  <div class="wrapper">
-    <h1>Rock Paper Scissors</h1>
-  </div>
+  <header>
+    <div class="wrapper">
+      <h1>Rock Paper Scissors Lizard Spock</h1>
+    </div>
+  </header>
+  <main>
+    <div class="wrapper">
+      <div class="rules-results">
+        <div class="rules-results__item rules-results__item--rules">
+          <h2>Rules</h2>
+          <p>Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock smashes Scissors, Scissors decapitates Lizard, Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock, and Rock crushes Scissors.</p>
+        </div>
+        <div class="rules-results__item rules-results__item--results">
+          <h2>Results</h2>
+          <table>
+            <tr>
+              <td>Win</td>
+              <td>Lose</td>
+              <td>Tie</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+        </div>
+        <div class="rules-results__item rules-results__item--text">
+          <h3></h3>
+        </div>
+      </div>
+      <div class="options">
+        <form id="options">
+          <div class="options__item">
+            <label for="rock">
+              <img src="dist/images/rock.svg" class="options__item-image">
+              <div class="options__item-text">Rock</div>
+              <input type="radio" id="rock" name="options" value="Rock">
+            </label>
+          </div>
+          <div class="options__item">
+            <label for="paper">
+              <img src="dist/images/paper.svg" class="options__item-image">
+              <div class="options__item-text">Paper</div>
+              <input type="radio" id="paper" name="options" value="Paper">
+            </label>
+          </div>
+          <div class="options__item">
+            <label for="scissors">
+              <img src="dist/images/scissors.svg" class="options__item-image">
+              <div class="options__item-text">Scissors</div>
+              <input type="radio" id="scissors" name="options" value="Scissors">
+            </label>
+          </div>
+          <div class="options__item options__item--lizard">
+            <label for="lizard">
+              <img src="dist/images/lizard.svg" class="options__item-image">
+              <div class="options__item-text">Lizard</div>
+              <input type="radio" id="lizard" name="options" value="Lizard">
+            </label>
+          </div>
+          <div class="options__item">
+            <label for="spock">
+              <img src="dist/images/spock.svg" class="options__item-image">
+              <div class="options__item-text">Spock</div>
+              <input type="radio" id="spock" name="options" value="Spock">
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="wrapper">
+      <p>Icons by Studio Fibonacci</p>
+    </div>
+  </footer>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="dist/js/scripts.min.js"></script>
 </body>
