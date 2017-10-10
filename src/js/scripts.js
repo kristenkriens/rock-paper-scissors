@@ -1,60 +1,99 @@
 var score = {
-  win: 0,
-  lose: 0,
-  tie: 0
+  wins: 0,
+  losses: 0,
+  plays: 0
 }
 
-$('input[type="radio"]').on('click', function() {
-  var computerChoice = Math.random();
-  var userChoice = $('input[type="radio"]:checked').val();
-  var choices = '';
-  var bothChoices = [];
-  var outcome = '';
+var numGamesChoice = 0;
 
-  if (computerChoice < 0.2) {
-    computerChoice = 'Rock';
-  } else if (computerChoice >= 0.2 && computerChoice < 0.4) {
-    computerChoice = 'Paper';
-  } else if (computerChoice >= 0.4 && computerChoice < 0.6) {
-    computerChoice = 'Scissors';
-  } else if (computerChoice >= 0.6 && computerChoice < 0.8) {
-    computerChoice = 'Lizard';
-  } else {
-    computerChoice = 'Spock';
-  }
+$('#games input[type="radio"]').on('click', function() {
+  numGamesChoice = $('#games input[type="radio"]:checked').val();
 
-  choices = `The computer chose ${computerChoice} and you chose ${userChoice}`;
+  $('#games input[type="radio"]').parent().removeClass('games-count__box-option--active');
+  $('#games input[type="radio"]:checked').parent().addClass('games-count__box-option--active');
 
-  bothChoices.push(computerChoice, userChoice);
+  $('.options').addClass('options--open');
+  $('.options').removeClass('options--disabled');
+  $('.options__item').removeClass('options__item--active');
 
-  function showOutcome(choice1, action, choice2) {
-    if(bothChoices.includes(choice1) && bothChoices.includes(choice2)) {
-      outcome = `${choice1} ${action} ${choice2}`;
+  $('.outcome').removeClass('outcome--open');
+
+  score.wins = 0;
+  score.losses = 0;
+  score.plays = 0;
+
+  $('.outcome__sides-item--you .outcome__sides-score p').text(score.wins);
+  $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
+});
+
+$('#options input[type="radio"]').on('click', function() {
+  score.plays += 1;
+
+  if (score.plays <= numGamesChoice) {
+    var computerChoice = Math.random();
+    var userChoice = $('#options input[type="radio"]:checked').val();
+    var bothChoices = [];
+    var outcome = '';
+
+    $('.outcome').addClass('outcome--open');
+
+    $('#options input[type="radio"]').parent().parent().removeClass('options__item--active');
+    $('#options input[type="radio"]:checked').parent().parent().addClass('options__item--active');
+
+    if (computerChoice < 0.2) {
+      computerChoice = 'rock';
+    } else if (computerChoice >= 0.2 && computerChoice < 0.4) {
+      computerChoice = 'paper';
+    } else if (computerChoice >= 0.4 && computerChoice < 0.6) {
+      computerChoice = 'scissors';
+    } else if (computerChoice >= 0.6 && computerChoice < 0.8) {
+      computerChoice = 'lizard';
+    } else {
+      computerChoice = 'spock';
     }
-  }
 
-  showOutcome('Scissors', 'cuts', 'Paper');
-  showOutcome('Paper', 'covers', 'Rock');
-  showOutcome('Rock', 'crushes', 'Lizard');
-  showOutcome('Lizard', 'poisons', 'Spock');
-  showOutcome('Spock', 'smashes', 'Scissors');
-  showOutcome('Scissors', 'decapitates', 'Lizard');
-  showOutcome('Lizard', 'eats', 'Paper');
-  showOutcome('Paper', 'disproves', 'Spock');
-  showOutcome('Spock', 'vaporizes', 'Rock');
-  showOutcome('Rock', 'crushes', 'Scissors');
+    $('.outcome__choices-item--you img').attr('src', `dist/images/${userChoice}.svg`);
+    $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}.svg`);
 
-  if (computerChoice === userChoice) {
-    $('.rules-score__item--text h3').text(`${choices}. It's a tie!`);
-    score.tie += 1;
-    $('tr:last-of-type td:nth-of-type(3)').text(score.tie);
-  } else if ((userChoice === 'Scissors' && computerChoice === 'Paper') || (userChoice === 'Paper' && computerChoice === 'Rock') || (userChoice === 'Rock' && computerChoice === 'Lizard') || (userChoice === 'Lizard' && computerChoice === 'Spock') || (userChoice === 'Spock' && computerChoice === 'Scissors') || (userChoice === 'Scissors' && computerChoice === 'Lizard') || (userChoice === 'Lizard' && computerChoice === 'Paper') || (userChoice === 'Paper' && computerChoice === 'Spock') || (userChoice === 'Spock' && computerChoice === 'Rock') || (userChoice === 'Rock' && computerChoice === 'Scissors')) {
-    $('.rules-score__item--text h3').text(`${choices}. ${outcome}, so you win!`);
-    score.win += 1;
-    $('tr:last-of-type td:nth-of-type(1)').text(score.win);
-  } else {
-    $('.rules-score__item--text h3').text(`${choices}. ${outcome}, so you lose!`);
-    score.lose += 1;
-    $('tr:last-of-type td:nth-of-type(2)').text(score.lose);
+    bothChoices.push(computerChoice, userChoice);
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function showOutcome(choice1, action, choice2) {
+      if(bothChoices.includes(choice1) && bothChoices.includes(choice2)) {
+        choice1 = capitalizeFirstLetter(choice1);
+        choice2 = capitalizeFirstLetter(choice2);
+        outcome = `${choice1} ${action} ${choice2}`;
+      }
+    }
+
+    showOutcome('scissors', 'cuts', 'paper');
+    showOutcome('paper', 'covers', 'rock');
+    showOutcome('rock', 'crushes', 'lizard');
+    showOutcome('lizard', 'poisons', 'spock');
+    showOutcome('spock', 'smashes', 'scissors');
+    showOutcome('scissors', 'decapitates', 'lizard');
+    showOutcome('lizard', 'eats', 'paper');
+    showOutcome('paper', 'disproves', 'spock');
+    showOutcome('spock', 'vaporizes', 'rock');
+    showOutcome('rock', 'crushes', 'scissors');
+
+    if (computerChoice === userChoice) {
+      $('.outcome__choices-text').text(`It's a tie!`);
+    } else if ((userChoice === 'scissors' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'scissors') || (userChoice === 'scissors' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'scissors')) {
+      $('.outcome__choices-text').text(`${outcome}!`);
+      score.wins += 1;
+      $('.outcome__sides-item--you .outcome__sides-score p').text(score.wins);
+    } else {
+      $('.outcome__choices-text').text(`${outcome}!`);
+      score.losses += 1;
+      $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
+    }
+
+    if (score.plays == numGamesChoice) {
+      $('.options').addClass('options--disabled');
+    }
   }
 });
