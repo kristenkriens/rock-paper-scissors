@@ -135,6 +135,18 @@
 
   &--open {
     display: block;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 5px;
+      background-color: $white;
+      height: 100%;
+    }
   }
 
   &__sides {
@@ -186,11 +198,6 @@
       width: 20%;
       padding: 0 15px;
       position: relative;
-
-      img {
-        border-radius: 50%;
-        background-color: $medium-blue;
-      }
 
       &--winner {
         width: 40%;
