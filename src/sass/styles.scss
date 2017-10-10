@@ -26,6 +26,10 @@ body {
 	font-size: 20px;
 	position: relative;
 	letter-spacing: 1px;
+
+	@media (max-width: $md-width) {
+		font-size: 18px;
+	}
 }
 
 .wrapper {
@@ -33,6 +37,10 @@ body {
 	width: 100%;
 	margin: 0 auto;
 	padding: 15px 30px;
+
+	@media (max-width: $sm-width) {
+		padding: 15px;
+	}
 }
 
 .accessible {
