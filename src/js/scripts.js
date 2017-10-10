@@ -7,12 +7,10 @@ var score = {
 var numGamesChoice = 0;
 
 function resetAll() {
-  $('#games input[type="radio"]').parent().removeClass('games-count__box-option--active');
-  $('#games input[type="radio"]:checked').parent().addClass('games-count__box-option--active');
-
-  $('.options').addClass('options--open');
-  $('.options').removeClass('options--disabled');
+  $('.options').removeClass('options--open');
   $('.options__item').removeClass('options__item--active');
+
+  $('.games-count__box-option').removeClass('games-count__box-option--active');
 
   $('.outcome').removeClass('outcome--open');
   $('.results').removeClass('results--open');
@@ -33,8 +31,14 @@ $('#games input[type="radio"]').on('click', function() {
 
 $('.results__button').on('click', function() {
   resetAll();
+});
 
-  $('.options').removeClass('options--open');
+$('#games input[type="radio"]').on('click', function() {
+  $('.games-count__box-option').removeClass('games-count__box-option--active');
+  $(this).parent().addClass('games-count__box-option--active');
+
+  $('.options').addClass('options--open');
+  $('.options').removeClass('options--disabled');
 });
 
 $('#options input[type="radio"]').on('click', function() {
@@ -48,8 +52,8 @@ $('#options input[type="radio"]').on('click', function() {
 
     $('.outcome').addClass('outcome--open');
 
-    $('#options input[type="radio"]').parent().parent().removeClass('options__item--active');
-    $('#options input[type="radio"]:checked').parent().parent().addClass('options__item--active');
+    $('.options__item').removeClass('options__item--active');
+    $(this).parent().parent().addClass('options__item--active');
 
     if (computerChoice < 0.2) {
       computerChoice = 'rock';
