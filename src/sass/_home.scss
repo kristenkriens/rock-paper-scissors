@@ -205,15 +205,43 @@
       }
     }
   }
+}
 
-  &__result {
-    display: none;
+.results {
+  display: none;
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  &--open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__text {
     font-size: 125px;
-    text-align: center;
-    margin-bottom: 35px;
+    line-height: 125px;
+    margin-bottom: 25px;
+  }
 
-    &--open {
-      display: block;
+  &__button {
+    background-color: $dark-blue;
+    border: 5px solid $white;
+    border-radius: 75px;
+    color: $white;
+    font-size: 25px;
+    outline: none;
+    padding: 15px 25px;
+    transition: 200ms background-color ease;
+
+    &:hover, &:active, &:focus {
+      background-color: $medium-blue;
     }
   }
 }

@@ -6,9 +6,7 @@ var score = {
 
 var numGamesChoice = 0;
 
-$('#games input[type="radio"]').on('click', function() {
-  numGamesChoice = $('#games input[type="radio"]:checked').val();
-
+function resetAll() {
   $('#games input[type="radio"]').parent().removeClass('games-count__box-option--active');
   $('#games input[type="radio"]:checked').parent().addClass('games-count__box-option--active');
 
@@ -17,7 +15,7 @@ $('#games input[type="radio"]').on('click', function() {
   $('.options__item').removeClass('options__item--active');
 
   $('.outcome').removeClass('outcome--open');
-  $('.outcome__result').removeClass('outcome__result--open');
+  $('.results').removeClass('results--open');
 
   score.wins = 0;
   score.losses = 0;
@@ -25,6 +23,18 @@ $('#games input[type="radio"]').on('click', function() {
 
   $('.outcome__sides-item--you .outcome__sides-score p').text(score.wins);
   $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
+}
+
+$('#games input[type="radio"]').on('click', function() {
+  numGamesChoice = $('#games input[type="radio"]:checked').val();
+
+  resetAll();
+});
+
+$('.results__button').on('click', function() {
+  resetAll();
+
+  $('.options').removeClass('options--open');
 });
 
 $('#options input[type="radio"]').on('click', function() {
@@ -90,14 +100,14 @@ $('#options input[type="radio"]').on('click', function() {
     if (score.plays == numGamesChoice) {
       $('.options').addClass('options--disabled');
 
-      $('.outcome__result').addClass('outcome__result--open');
+      $('.results').addClass('results--open');
 
       if (score.wins > score.losses) {
-        $('.outcome__result').text('You Win!');
+        $('.results__text').text('You Win!');
       } else if (score.wins < score.losses) {
-        $('.outcome__result').text('You Lose!');
+        $('.results__text').text('You Lose!');
       } else {
-        $('.outcome__result').text('It\'s a tie!');
+        $('.results__text').text('It\'s a tie!');
       }
     }
   }
