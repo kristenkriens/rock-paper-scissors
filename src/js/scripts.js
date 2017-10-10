@@ -56,21 +56,15 @@ $('#options input[type="radio"]').on('click', function() {
     $('.outcome__choices-item--you img').attr('src', `dist/images/${userChoice}.svg`);
     $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}.svg`);
 
-    $('.outcome__choices-item--you').removeClass('outcome__choices-item--winner').css({left: 0});
-    $('.outcome__choices-item--computer').removeClass('outcome__choices-item--winner').css({right: 0});
+    $('.outcome__choices-item--winner img').removeAttr('src');
 
     bothChoices.push(computerChoice, userChoice);
 
     function showOutcome(winner, loser) {
       if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
-        if (winner === userChoice) {
-          $('.outcome__choices-item--you').addClass('outcome__choices-item--winner');
-        } else {
-          $('.outcome__choices-item--computer').addClass('outcome__choices-item--winner');
-        }
-
-        $('.outcome__choices-item--you').animate({left: '30%'}, 2000);
-        $('.outcome__choices-item--computer').animate({right: '30%'}, 2000);
+        $('.outcome__choices-item--winner img').attr('src', `dist/images/${winner}.svg`);
+      } else {
+        $('.outcome__choices-item--winner img').attr('src', `dist/images/${userChoice}.svg`);
       }
     }
 
