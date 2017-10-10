@@ -142,6 +142,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: -145px;
+    margin-bottom: 45px;
 
     &-item {
       width: calc(40% - 15px);
@@ -181,16 +182,30 @@
     flex-wrap: wrap;
     margin: 0 -15px;
 
-    &-text {
-      width: 100%;
-      margin: 25px 0;
-      text-align: center;
-      font-size: 35px;
-    }
-
     &-item {
       width: 40%;
       padding: 0 15px;
+      position: relative;
+
+      img {
+        border-radius: 50%;
+        background-color: $medium-blue;
+      }
+
+      &--winner {
+        z-index: 100;
+      }
+    }
+  }
+
+  &__result {
+    display: none;
+    font-size: 125px;
+    text-align: center;
+    margin-bottom: 35px;
+
+    &--open {
+      display: block;
     }
   }
 }

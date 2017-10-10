@@ -17,6 +17,7 @@ $('#games input[type="radio"]').on('click', function() {
   $('.options__item').removeClass('options__item--active');
 
   $('.outcome').removeClass('outcome--open');
+  $('.outcome__result').removeClass('outcome__result--open');
 
   score.wins = 0;
   score.losses = 0;
@@ -55,45 +56,55 @@ $('#options input[type="radio"]').on('click', function() {
     $('.outcome__choices-item--you img').attr('src', `dist/images/${userChoice}.svg`);
     $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}.svg`);
 
+    $('.outcome__choices-item--you').removeClass('outcome__choices-item--winner').css({left: 0});
+    $('.outcome__choices-item--computer').removeClass('outcome__choices-item--winner').css({right: 0});
+
     bothChoices.push(computerChoice, userChoice);
 
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    function showOutcome(winner, loser) {
+      if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
+        if (winner === userChoice) {
+          $('.outcome__choices-item--you').addClass('outcome__choices-item--winner');
+        } else {
+          $('.outcome__choices-item--computer').addClass('outcome__choices-item--winner');
+        }
 
-    function showOutcome(choice1, action, choice2) {
-      if(bothChoices.includes(choice1) && bothChoices.includes(choice2)) {
-        choice1 = capitalizeFirstLetter(choice1);
-        choice2 = capitalizeFirstLetter(choice2);
-        outcome = `${choice1} ${action} ${choice2}`;
+        $('.outcome__choices-item--you').animate({left: '30%'}, 2000);
+        $('.outcome__choices-item--computer').animate({right: '30%'}, 2000);
       }
     }
 
-    showOutcome('scissors', 'cuts', 'paper');
-    showOutcome('paper', 'covers', 'rock');
-    showOutcome('rock', 'crushes', 'lizard');
-    showOutcome('lizard', 'poisons', 'spock');
-    showOutcome('spock', 'smashes', 'scissors');
-    showOutcome('scissors', 'decapitates', 'lizard');
-    showOutcome('lizard', 'eats', 'paper');
-    showOutcome('paper', 'disproves', 'spock');
-    showOutcome('spock', 'vaporizes', 'rock');
-    showOutcome('rock', 'crushes', 'scissors');
+    showOutcome('scissors', 'paper');
+    showOutcome('paper', 'rock');
+    showOutcome('rock', 'lizard');
+    showOutcome('lizard', 'spock');
+    showOutcome('spock', 'scissors');
+    showOutcome('scissors', 'lizard');
+    showOutcome('lizard', 'paper');
+    showOutcome('paper', 'spock');
+    showOutcome('spock', 'rock');
+    showOutcome('rock', 'scissors');
 
-    if (computerChoice === userChoice) {
-      $('.outcome__choices-text').text(`It's a tie!`);
-    } else if ((userChoice === 'scissors' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'scissors') || (userChoice === 'scissors' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'scissors')) {
-      $('.outcome__choices-text').text(`${outcome}!`);
+    if ((userChoice === 'scissors' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'scissors') || (userChoice === 'scissors' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'scissors')) {
       score.wins += 1;
       $('.outcome__sides-item--you .outcome__sides-score p').text(score.wins);
-    } else {
-      $('.outcome__choices-text').text(`${outcome}!`);
+    } else if ((userChoice === 'paper' && computerChoice === 'scissors') || (userChoice === 'rock' && computerChoice === 'paper') || (userChoice === 'lizard' && computerChoice === 'rock') || (userChoice === 'spock' && computerChoice === 'lizard') || (userChoice === 'scissors' && computerChoice === 'spock') || (userChoice === 'lizard' && computerChoice === 'scissors') || (userChoice === 'paper' && computerChoice === 'lizard') || (userChoice === 'spock' && computerChoice === 'paper') || (userChoice === 'rock' && computerChoice === 'spock') || (userChoice === 'scissors' && computerChoice === 'rock')) {
       score.losses += 1;
       $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
     }
 
     if (score.plays == numGamesChoice) {
       $('.options').addClass('options--disabled');
+
+      $('.outcome__result').addClass('outcome__result--open');
+
+      if (score.wins > score.losses) {
+        $('.outcome__result').text('You Win!');
+      } else if (score.wins < score.losses) {
+        $('.outcome__result').text('You Lose!');
+      } else {
+        $('.outcome__result').text('It\'s a tie!');
+      }
     }
   }
 });
