@@ -67,17 +67,19 @@ $('#options input[type="radio"]').on('click', function() {
       computerChoice = 'spock';
     }
 
+    $('.outcome__choices-item--winner img').removeAttr('src');
+
     $('.outcome__choices-item--you img').attr('src', `dist/images/${userChoice}.svg`);
     $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}.svg`);
-
-    $('.outcome__choices-item--winner img').removeAttr('src');
 
     bothChoices.push(computerChoice, userChoice);
 
     function showOutcome(winner, loser) {
       if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
         $('.outcome__choices-item--winner img').attr('src', `dist/images/${winner}.svg`);
-      } else {
+      }
+
+      if(computerChoice === userChoice) {
         $('.outcome__choices-item--winner img').attr('src', `dist/images/${userChoice}.svg`);
       }
     }
