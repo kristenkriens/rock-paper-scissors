@@ -15,23 +15,24 @@ html, body {
 	overflow-x: hidden;
 }
 
-img {
+img{
 	max-width: 100%;
 }
 
 body {
-	color: $black;
-	font-family: $base-font;
-	font-size: 14px;
-	line-height: 1.75;
+	background-color: $light-blue;
+	color: $white;
+	font-family: 'Boogaloo';
+	font-size: 20px;
 	position: relative;
+	letter-spacing: 1px;
 }
 
 .wrapper {
 	max-width: 1200px;
 	width: 100%;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 15px 30px;
 }
 
 .accessible {
