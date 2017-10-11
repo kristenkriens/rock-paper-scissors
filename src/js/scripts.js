@@ -23,17 +23,15 @@ function resetAll() {
   $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
 }
 
-$('#games input[type="radio"]').on('click', function() {
-  numGamesChoice = $('#games input[type="radio"]:checked').val();
-
-  resetAll();
-});
-
 $('.results__button').on('click', function() {
   resetAll();
 });
 
 $('#games input[type="radio"]').on('click', function() {
+  resetAll();
+
+  numGamesChoice = $('#games input[type="radio"]:checked').val();
+
   $('.games-count__box-option').removeClass('games-count__box-option--active');
   $(this).parent().addClass('games-count__box-option--active');
 
