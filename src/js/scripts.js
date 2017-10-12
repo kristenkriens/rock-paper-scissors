@@ -37,6 +37,10 @@ $('#games input[type="radio"]').on('click', function() {
 
   $('.options').addClass('options--open');
   $('.options').removeClass('options--disabled');
+
+  $('html, body').animate({
+      scrollTop: $('#options').offset().top
+  }, 1000);
 });
 
 $('#options input[type="radio"]').on('click', function() {
@@ -115,4 +119,8 @@ $('#options input[type="radio"]').on('click', function() {
       }
     }
   }
+
+  $('html, body').animate({
+      scrollTop: $('#outcome').offset().top
+  }, 1000);
 });
