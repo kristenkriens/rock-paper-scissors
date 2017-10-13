@@ -19,7 +19,7 @@ function resetAll() {
   score.losses = 0;
   score.plays = 0;
 
-  $('.outcome__sides-item--you .outcome__sides-score p').text(score.wins);
+  $('.outcome__sides-item--human .outcome__sides-score p').text(score.wins);
   $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
 }
 
@@ -71,8 +71,8 @@ $('#options input[type="radio"]').on('click', function() {
 
     $('.outcome__choices-item--winner img').removeAttr('src');
 
-    $('.outcome__choices-item--you img').attr('src', `dist/images/${userChoice}.svg`);
-    $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}.svg`);
+    $('.outcome__choices-item--human img').attr('src', `dist/images/${userChoice}-human.svg`);
+    $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}-computer.svg`);
 
     bothChoices.push(computerChoice, userChoice);
 
@@ -99,7 +99,7 @@ $('#options input[type="radio"]').on('click', function() {
 
     if ((userChoice === 'scissors' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'scissors') || (userChoice === 'scissors' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'scissors')) {
       score.wins += 1;
-      $('.outcome__sides-item--you .outcome__sides-score p').text(score.wins);
+      $('.outcome__sides-item--human .outcome__sides-score p').text(score.wins);
     } else if ((userChoice === 'paper' && computerChoice === 'scissors') || (userChoice === 'rock' && computerChoice === 'paper') || (userChoice === 'lizard' && computerChoice === 'rock') || (userChoice === 'spock' && computerChoice === 'lizard') || (userChoice === 'scissors' && computerChoice === 'spock') || (userChoice === 'lizard' && computerChoice === 'scissors') || (userChoice === 'paper' && computerChoice === 'lizard') || (userChoice === 'spock' && computerChoice === 'paper') || (userChoice === 'rock' && computerChoice === 'spock') || (userChoice === 'scissors' && computerChoice === 'rock')) {
       score.losses += 1;
       $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
@@ -117,10 +117,16 @@ $('#options input[type="radio"]').on('click', function() {
       } else {
         $('.results__text').text('It\'s a tie!');
       }
+    } else if (score.plays < numGamesChoice) {
+      setTimeout(function() {
+        $('html, body').animate({
+            scrollTop: $('#options').offset().top
+        }, 1000);
+      }, 2000);
     }
-  }
 
-  $('html, body').animate({
-      scrollTop: $('#outcome').offset().top
-  }, 1000);
+    $('html, body').animate({
+        scrollTop: $('#outcome').offset().top
+    }, 1000);
+  }
 });
