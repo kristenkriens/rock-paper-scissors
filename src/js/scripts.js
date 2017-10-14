@@ -7,6 +7,10 @@ $(function() {
 
   var numGamesChoice = 0;
 
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   function resetAll() {
     $('.options').removeClass('options--open');
     $('.options__item').removeClass('options__item--active');
@@ -74,18 +78,18 @@ $(function() {
 
       $('.outcome__choices-item--winner img').removeAttr('src');
 
-      $('.outcome__choices-item--human img').attr('src', `dist/images/${userChoice}-human.svg`);
-      $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}-computer.svg`);
+      $('.outcome__choices-item--human img').attr('src', `dist/images/${userChoice}-human.svg`).attr('alt', `${capitalize(userChoice)}`);
+      $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}-computer.svg`).attr('alt', `${capitalize(computerChoice)}`);
 
       bothChoices.push(computerChoice, userChoice);
 
       function showOutcome(winner, loser) {
         if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
-          $('.outcome__choices-item--winner img').attr('src', `dist/images/${winner}.svg`);
+          $('.outcome__choices-item--winner img').attr('src', `dist/images/${winner}.svg`).attr('alt', `${capitalize(winner)}`);
         }
 
         if(computerChoice === userChoice) {
-          $('.outcome__choices-item--winner img').attr('src', `dist/images/${userChoice}.svg`);
+          $('.outcome__choices-item--winner img').attr('src', `dist/images/${userChoice}.svg`).attr('alt', `${capitalize(userChoice)}`);
         }
       }
 
