@@ -117,6 +117,8 @@ $('#options input[type="radio"]').on('click', function() {
       } else {
         $('.results__text').text('It\'s a tie!');
       }
+
+      $('.results__score').text(`${score.wins} - ${score.losses}`)
     } else if (score.plays < numGamesChoice) {
       setTimeout(function() {
         $('html, body').animate({
