@@ -119,15 +119,41 @@ $('#options input[type="radio"]').on('click', function() {
 
         setTimeout(function() {
           $('.results__text').append('<audio autoplay><source src="dist/sounds/winner.mp3" type="audio/mpeg"></audio>');
+
+          var flash = setInterval(function() {
+            $('.results__text').toggleClass('results__text--on');
+          }, 250);
+
+          setTimeout(function() {
+            clearInterval(flash);
+          }, 1000);
         }, 1000);
       } else if (score.wins < score.losses) {
         $('.results__text').text('You Lose!');
 
         setTimeout(function() {
           $('.results__text').append('<audio autoplay><source src="dist/sounds/loser.mp3" type="audio/mpeg"></audio>');
+
+          var flash = setInterval(function() {
+            $('.results__text').toggleClass('results__text--on');
+          }, 250);
+
+          setTimeout(function() {
+            clearInterval(flash);
+          }, 1000);
         }, 1000);
       } else {
-        $('.results__text').text('It\'s a tie!');
+        setTimeout(function() {
+          $('.results__text').text('It\'s a tie!');
+
+          var flash = setInterval(function() {
+            $('.results__text').toggleClass('results__text--on');
+          }, 250);
+
+          setTimeout(function() {
+            clearInterval(flash);
+          }, 1000);
+        }, 1000);
       }
 
       $('.results__score').text(`${score.wins} - ${score.losses}`);

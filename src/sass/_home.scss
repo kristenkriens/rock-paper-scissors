@@ -289,6 +289,7 @@
   }
 
   &__text {
+    opacity: 0;
     font-size: 125px;
     line-height: 125px;
     margin-bottom: 10px;
@@ -301,6 +302,10 @@
     @media (max-width: $sm-width) {
       font-size: 75px;
       line-height: 75px;
+    }
+
+    &--on {
+      opacity: 1;
     }
   }
 
