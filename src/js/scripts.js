@@ -21,6 +21,8 @@ function resetAll() {
 
   $('.outcome__sides-item--human .outcome__sides-score p').text(score.wins);
   $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
+
+  $('.results__text').text('');
 }
 
 $('.results__button').on('click', function() {
@@ -108,17 +110,28 @@ $('#options input[type="radio"]').on('click', function() {
     if (score.plays == numGamesChoice) {
       $('.options').addClass('options--disabled');
 
-      $('.results').addClass('results--open');
+      setTimeout(function() {
+        $('.results').addClass('results--open');
+      }, 1000);
 
       if (score.wins > score.losses) {
         $('.results__text').text('You Win!');
+
+        setTimeout(function() {
+          $('.results__text').append('<audio autoplay><source src="dist/sounds/winner.mp3" type="audio/mpeg"></audio>');
+        }, 1000);
       } else if (score.wins < score.losses) {
         $('.results__text').text('You Lose!');
+
+        setTimeout(function() {
+          $('.results__text').append('<audio autoplay><source src="dist/sounds/loser.mp3" type="audio/mpeg"></audio>');
+        }, 1000);
       } else {
         $('.results__text').text('It\'s a tie!');
       }
 
-      $('.results__score').text(`${score.wins} - ${score.losses}`)
+      $('.results__score').text(`${score.wins} - ${score.losses}`);
+      $('.results__button').addClass('results__button--open');
     } else if (score.plays < numGamesChoice) {
       setTimeout(function() {
         $('html, body').animate({
