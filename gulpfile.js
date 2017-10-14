@@ -55,8 +55,13 @@ gulp.task('images', function() {
 });
 
 gulp.task('fonts', function() {
-	return gulp.src('src/fonts/**/*')
+	return gulp.src('src/fonts/*')
 		.pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('sounds', function() {
+	return gulp.src('src/sounds/*')
+		.pipe(gulp.dest('dist/sounds'));
 });
 
 // configure which files to watch and what tasks to use on file changes
@@ -66,4 +71,4 @@ gulp.task('watch', function() {
 	gulp.watch('*.html', reload);
 });
 
-gulp.task('default', ['styles', 'scripts', 'images', 'fonts', 'bs', 'watch']);
+gulp.task('default', ['styles', 'scripts', 'images', 'fonts', 'sounds', 'bs', 'watch']);
