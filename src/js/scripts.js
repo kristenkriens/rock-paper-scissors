@@ -112,6 +112,20 @@ $(function() {
         $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
       }
 
+      function soundsFlash(outcome) {
+        setTimeout(function() {
+          $('.results__text').append(`<audio autoplay><source src="dist/sounds/${outcome}.mp3" type="audio/mpeg"></audio>`);
+
+          var flash = setInterval(function() {
+            $('.results__text').toggleClass('results__text--on');
+          }, 250);
+
+          setTimeout(function() {
+            clearInterval(flash);
+          }, 1000);
+        }, 1000);
+      }
+
       if (score.plays == numGamesChoice) {
         $('.options').addClass('options--disabled');
 
@@ -122,43 +136,15 @@ $(function() {
         if (score.wins > score.losses) {
           $('.results__text').text('You Win!');
 
-          setTimeout(function() {
-            $('.results__text').append('<audio autoplay><source src="dist/sounds/winner.mp3" type="audio/mpeg"></audio>');
-
-            var flash = setInterval(function() {
-              $('.results__text').toggleClass('results__text--on');
-            }, 250);
-
-            setTimeout(function() {
-              clearInterval(flash);
-            }, 1000);
-          }, 1000);
+          soundsFlash('winner');
         } else if (score.wins < score.losses) {
           $('.results__text').text('You Lose!');
 
-          setTimeout(function() {
-            $('.results__text').append('<audio autoplay><source src="dist/sounds/loser.mp3" type="audio/mpeg"></audio>');
-
-            var flash = setInterval(function() {
-              $('.results__text').toggleClass('results__text--on');
-            }, 250);
-
-            setTimeout(function() {
-              clearInterval(flash);
-            }, 1000);
-          }, 1000);
+          soundsFlash('loser');
         } else {
-          setTimeout(function() {
-            $('.results__text').text('It\'s a tie!');
+          $('.results__text').text('It\'s a tie!');
 
-            var flash = setInterval(function() {
-              $('.results__text').toggleClass('results__text--on');
-            }, 250);
-
-            setTimeout(function() {
-              clearInterval(flash);
-            }, 1000);
-          }, 1000);
+          soundsFlash('tie');
         }
 
         $('.results__score').text(`${score.wins} - ${score.losses}`);
