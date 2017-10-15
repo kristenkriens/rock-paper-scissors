@@ -160,6 +160,10 @@ $(function() {
       $('html, body').animate({
           scrollTop: $('#outcome').offset().top
       }, 1000);
+
+      $('html, body').on('wheel', function(){
+        $(this).stop();
+      });
     }
   });
 });
