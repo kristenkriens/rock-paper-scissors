@@ -1,4 +1,4 @@
-var gulp   = require('gulp'),
+var gulp = require('gulp'),
 		autoprefixer = require('gulp-autoprefixer'),
 		concat = require('gulp-concat'),
 		imageMin = require('gulp-imagemin'),
