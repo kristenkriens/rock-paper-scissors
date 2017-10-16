@@ -120,6 +120,8 @@ $(function() {
             $('.results__text').toggleClass('results__text--on');
           }, 250);
 
+          $('.results__text').addClass('results__text--on');
+
           setTimeout(function() {
             clearInterval(flash);
           }, 1000);
