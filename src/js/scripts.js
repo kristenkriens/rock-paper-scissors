@@ -6,46 +6,57 @@ $(function() {
   }
 
   var numGamesChoice = 0;
+  var $htmlBody = $('html, body');
+  var $resultsText = $('.results__text');
+  var $options = $('.options');
+  var $optionsItem = $('.options__item');;
+  var $humanScore = $('.outcome__sides-item--human .outcome__sides-score p');
+  var $computerScore = $('.outcome__sides-item--computer .outcome__sides-score p');
+  var $outcome = $('.outcome');
+  var $results = $('.results');
+  var $resultsButton = $('.results__button');
+  var $gamesCountOption = $('.games-count__box-option');
+  var $winnerImage = $('.outcome__choices-item--winner img');
 
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   function resetAll() {
-    $('.options').removeClass('options--open');
-    $('.options__item').removeClass('options__item--active');
+    $options.removeClass('options--open');
+    $optionsItem.removeClass('options__item--active');
 
-    $('.games-count__box-option').removeClass('games-count__box-option--active');
+    $gamesCountOption.removeClass('games-count__box-option--active');
 
-    $('.outcome').removeClass('outcome--open');
-    $('.results').removeClass('results--open');
+    $outcome.removeClass('outcome--open');
+    $results.removeClass('results--open');
 
     score.wins = 0;
     score.losses = 0;
     score.plays = 0;
 
-    $('.outcome__sides-item--human .outcome__sides-score p').text(score.wins);
-    $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
+    $humanScore.text(score.wins);
+    $computerScore.text(score.losses);
 
-    $('.results__text').text('');
+    $resultsText.text('');
   }
 
-  $('.results__button').on('click', function() {
+  $resultsButton.on('click', function() {
     resetAll();
   });
 
   $('#games input[type="radio"]').on('click', function() {
     resetAll();
 
-    numGamesChoice = $('#games input[type="radio"]:checked').val();
+    numGamesChoice = $(this).val();
 
-    $('.games-count__box-option').removeClass('games-count__box-option--active');
+    $gamesCountOption.removeClass('games-count__box-option--active');
     $(this).parent().addClass('games-count__box-option--active');
 
-    $('.options').addClass('options--open');
-    $('.options').removeClass('options--disabled');
+    $options.addClass('options--open');
+    $options.removeClass('options--disabled');
 
-    $('html, body').animate({
+    $htmlBody.animate({
         scrollTop: $('#options').offset().top
     }, 1000);
   });
@@ -59,9 +70,9 @@ $(function() {
       var bothChoices = [];
       var outcome = '';
 
-      $('.outcome').addClass('outcome--open');
+      $outcome.addClass('outcome--open');
 
-      $('.options__item').removeClass('options__item--active');
+      $optionsItem.removeClass('options__item--active');
       $(this).parent().parent().addClass('options__item--active');
 
       if (computerChoice < 0.2) {
@@ -76,7 +87,7 @@ $(function() {
         computerChoice = 'spock';
       }
 
-      $('.outcome__choices-item--winner img').removeAttr('src');
+      $winnerImage.removeAttr('src');
 
       $('.outcome__choices-item--human img').attr('src', `dist/images/${userChoice}-human.svg`).attr('alt', `${capitalize(userChoice)}`);
       $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}-computer.svg`).attr('alt', `${capitalize(computerChoice)}`);
@@ -85,11 +96,11 @@ $(function() {
 
       function showOutcome(winner, loser) {
         if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
-          $('.outcome__choices-item--winner img').attr('src', `dist/images/${winner}.svg`).attr('alt', `${capitalize(winner)}`);
+          $winnerImage.attr('src', `dist/images/${winner}.svg`).attr('alt', `${capitalize(winner)}`);
         }
 
         if(computerChoice === userChoice) {
-          $('.outcome__choices-item--winner img').attr('src', `dist/images/${userChoice}.svg`).attr('alt', `${capitalize(userChoice)}`);
+          $winnerImage.attr('src', `dist/images/${userChoice}.svg`).attr('alt', `${capitalize(userChoice)}`);
         }
       }
 
@@ -148,13 +159,13 @@ $(function() {
 
       function soundsFlash(outcome) {
         setTimeout(function() {
-          $('.results__text').append(`<audio autoplay><source src="dist/sounds/${outcome}.mp3" type="audio/mpeg"></audio>`);
+          $resultsText.append(`<audio autoplay><source src="dist/sounds/${outcome}.mp3" type="audio/mpeg"></audio>`);
 
           var flash = setInterval(function() {
-            $('.results__text').toggleClass('results__text--on');
+            $resultsText.toggleClass('results__text--on');
           }, 250);
 
-          $('.results__text').addClass('results__text--on');
+          $resultsText.addClass('results__text--on');
 
           setTimeout(function() {
             clearInterval(flash);
@@ -163,41 +174,41 @@ $(function() {
       }
 
       if (score.plays == numGamesChoice) {
-        $('.options').addClass('options--disabled');
+        $options.addClass('options--disabled');
 
         setTimeout(function() {
-          $('.results').addClass('results--open');
+          $results.addClass('results--open');
         }, 1000);
 
         if (score.wins > score.losses) {
-          $('.results__text').text('You Win!');
+          $resultsText.text('You Win!');
 
           soundsFlash('winner');
         } else if (score.wins < score.losses) {
-          $('.results__text').text('You Lose!');
+          $resultsText.text('You Lose!');
 
           soundsFlash('loser');
         } else {
-          $('.results__text').text('It\'s a tie!');
+          $resultsText.text('It\'s a tie!');
 
           soundsFlash('tie');
         }
 
         $('.results__score').text(`${score.wins} - ${score.losses}`);
-        $('.results__button').addClass('results__button--open');
+        $resultsButton.addClass('results__button--open');
       } else if (score.plays < numGamesChoice) {
         setTimeout(function() {
-          $('html, body').animate({
+          $htmlBody.animate({
               scrollTop: $('#options').offset().top
           }, 1000);
         }, 2000);
       }
 
-      $('html, body').animate({
+      $htmlBody.animate({
           scrollTop: $('#outcome').offset().top
       }, 1000);
 
-      $('html, body').on('wheel', function(){
+      $htmlBody.on('wheel', function(){
         $(this).stop();
       });
     }
