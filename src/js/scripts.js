@@ -6,6 +6,11 @@ $(function() {
   }
 
   var numGamesChoice = 0;
+  var bothChoices = [];
+  var computerChoice = '';
+  var userChoice = '';
+  var outcome = '';
+
   var $htmlBody = $('html, body');
   var $resultsText = $('.results__text');
   var $options = $('.options');
@@ -57,34 +62,20 @@ $(function() {
     }, 1000);
   }
 
-  $resultsButton.on('click', function() {
-    resetAll();
-  });
+  function showOutcome(winner, loser) {
+    if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
+      $winnerImage.attr('src', `dist/images/${winner}.svg`).attr('alt', `${capitalize(winner)}`);
+    }
 
-  $('#games input[type="radio"]').on('click', function() {
-    resetAll();
+    if(computerChoice === userChoice) {
+      $winnerImage.attr('src', `dist/images/${userChoice}.svg`).attr('alt', `${capitalize(userChoice)}`);
+    }
+  }
 
-    numGamesChoice = $(this).val();
-
-    $gamesCountOption.removeClass('games-count__box-option--active');
-    $(this).parent().addClass('games-count__box-option--active');
-
-    $options.addClass('options--open');
-    $options.removeClass('options--disabled');
-
-    $htmlBody.animate({
-        scrollTop: $('#options').offset().top
-    }, 1000);
-  });
-
-  $('#options input[type="radio"]').on('click', function() {
-    score.plays += 1;
-
+  function start() {
     if (score.plays <= numGamesChoice) {
-      var computerChoice = Math.random();
-      var userChoice = $('#options input[type="radio"]:checked').val();
-      var bothChoices = [];
-      var outcome = '';
+      computerChoice = Math.random();
+      userChoice = $('#options input[type="radio"]:checked').val();
 
       $outcome.addClass('outcome--open');
 
@@ -109,16 +100,6 @@ $(function() {
       $('.outcome__choices-item--computer img').attr('src', `dist/images/${computerChoice}-computer.svg`).attr('alt', `${capitalize(computerChoice)}`);
 
       bothChoices.push(computerChoice, userChoice);
-
-      function showOutcome(winner, loser) {
-        if (bothChoices.includes(winner) && bothChoices.includes(loser)) {
-          $winnerImage.attr('src', `dist/images/${winner}.svg`).attr('alt', `${capitalize(winner)}`);
-        }
-
-        if(computerChoice === userChoice) {
-          $winnerImage.attr('src', `dist/images/${userChoice}.svg`).attr('alt', `${capitalize(userChoice)}`);
-        }
-      }
 
       showOutcome('scissors', 'paper');
       showOutcome('paper', 'rock');
@@ -212,5 +193,30 @@ $(function() {
         $(this).stop();
       });
     }
+  }
+
+  $resultsButton.on('click', function() {
+    resetAll();
+  });
+
+  $('#games input[type="radio"]').on('click', function() {
+    resetAll();
+
+    numGamesChoice = $(this).val();
+
+    $gamesCountOption.removeClass('games-count__box-option--active');
+    $(this).parent().addClass('games-count__box-option--active');
+
+    $options.addClass('options--open');
+    $options.removeClass('options--disabled');
+
+    $htmlBody.animate({
+        scrollTop: $('#options').offset().top
+    }, 1000);
+  });
+
+  $('#options input[type="radio"]').on('click', function() {
+    score.plays += 1;
+    start();
   });
 });
