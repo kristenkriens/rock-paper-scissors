@@ -41,6 +41,22 @@ $(function() {
     $resultsText.text('');
   }
 
+  function soundsFlash(outcome) {
+    setTimeout(function() {
+      $resultsText.append(`<audio autoplay><source src="dist/sounds/${outcome}.mp3" type="audio/mpeg"></audio>`);
+
+      var flash = setInterval(function() {
+        $resultsText.toggleClass('results__text--on');
+      }, 250);
+
+      $resultsText.addClass('results__text--on');
+
+      setTimeout(function() {
+        clearInterval(flash);
+      }, 1000);
+    }, 1000);
+  }
+
   $resultsButton.on('click', function() {
     resetAll();
   });
@@ -155,22 +171,6 @@ $(function() {
           score.losses += 1;
           $computerScore.text(score.losses);
         }
-      }
-
-      function soundsFlash(outcome) {
-        setTimeout(function() {
-          $resultsText.append(`<audio autoplay><source src="dist/sounds/${outcome}.mp3" type="audio/mpeg"></audio>`);
-
-          var flash = setInterval(function() {
-            $resultsText.toggleClass('results__text--on');
-          }, 250);
-
-          $resultsText.addClass('results__text--on');
-
-          setTimeout(function() {
-            clearInterval(flash);
-          }, 1000);
-        }, 1000);
       }
 
       if (score.plays == numGamesChoice) {
