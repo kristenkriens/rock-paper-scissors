@@ -104,12 +104,46 @@ $(function() {
       showOutcome('spock', 'rock');
       showOutcome('rock', 'scissors');
 
-      if ((userChoice === 'scissors' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'scissors') || (userChoice === 'scissors' && computerChoice === 'lizard') || (userChoice === 'lizard' && computerChoice === 'paper') || (userChoice === 'paper' && computerChoice === 'spock') || (userChoice === 'spock' && computerChoice === 'rock') || (userChoice === 'rock' && computerChoice === 'scissors')) {
-        score.wins += 1;
-        $('.outcome__sides-item--human .outcome__sides-score p').text(score.wins);
-      } else if ((userChoice === 'paper' && computerChoice === 'scissors') || (userChoice === 'rock' && computerChoice === 'paper') || (userChoice === 'lizard' && computerChoice === 'rock') || (userChoice === 'spock' && computerChoice === 'lizard') || (userChoice === 'scissors' && computerChoice === 'spock') || (userChoice === 'lizard' && computerChoice === 'scissors') || (userChoice === 'paper' && computerChoice === 'lizard') || (userChoice === 'spock' && computerChoice === 'paper') || (userChoice === 'rock' && computerChoice === 'spock') || (userChoice === 'scissors' && computerChoice === 'rock')) {
-        score.losses += 1;
-        $('.outcome__sides-item--computer .outcome__sides-score p').text(score.losses);
+      if (userChoice === 'scissors') {
+        if (computerChoice === 'paper' || computerChoice === 'lizard') {
+          score.wins += 1;
+          $humanScore.text(score.wins);
+        } else if (computerChoice === 'spock' || computerChoice === 'rock') {
+          score.losses += 1;
+          $computerScore.text(score.losses);
+        }
+      } else if (userChoice === 'paper') {
+        if (computerChoice === 'rock' || computerChoice === 'spock') {
+          score.wins += 1;
+          $humanScore.text(score.wins);
+        } else if (computerChoice === 'scissors' || computerChoice === 'lizard') {
+          score.losses += 1;
+          $computerScore.text(score.losses);
+        }
+      } else if (userChoice === 'rock') {
+        if (computerChoice === 'lizard' || computerChoice === 'scissors') {
+          score.wins += 1;
+          $humanScore.text(score.wins);
+        } else if (computerChoice === 'paper' || computerChoice === 'spock') {
+          score.losses += 1;
+          $computerScore.text(score.losses);
+        }
+      } else if (userChoice === 'lizard') {
+        if (computerChoice === 'spock' || computerChoice === 'paper') {
+          score.wins += 1;
+          $humanScore.text(score.wins);
+        } else if (computerChoice === 'rock' || computerChoice === 'scissors') {
+          score.losses += 1;
+          $computerScore.text(score.losses);
+        }
+      } else if (userChoice === 'spock') {
+        if (computerChoice === 'scissors' || computerChoice === 'rock') {
+          score.wins += 1;
+          $humanScore.text(score.wins);
+        } else if (computerChoice === 'paper' || computerChoice === 'lizard') {
+          score.losses += 1;
+          $computerScore.text(score.losses);
+        }
       }
 
       function soundsFlash(outcome) {
