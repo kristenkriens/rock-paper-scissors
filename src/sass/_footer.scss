@@ -3,6 +3,8 @@
   background-color: $dark-blue;
   font-size: 15px;
   padding: 10px 0;
+  align-self: flex-end;
+  width: 100%;
 
   @media (max-width: $sm-width) {
     font-size: 13px;

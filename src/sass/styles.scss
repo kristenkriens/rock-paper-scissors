@@ -15,7 +15,7 @@ html, body {
 	overflow-x: hidden;
 }
 
-img{
+img {
 	max-width: 100%;
 }
 
@@ -26,6 +26,9 @@ body {
 	font-size: 20px;
 	position: relative;
 	letter-spacing: 1px;
+	display: flex;
+	flex-wrap: wrap;
+	min-height: 100vh;
 
 	@media (max-width: $md-width) {
 		font-size: 18px;
